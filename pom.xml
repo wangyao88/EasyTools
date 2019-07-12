@@ -5,9 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mohan.project</groupId>
-	<artifactId>easytools</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>easytools</name>
+	<artifactId>easy-tools</artifactId>
+	<version>1.0</version>
+	<name>EasyTools</name>
 	<description>鄙人生平所学，java各种工具类</description>
 
 	<properties>
