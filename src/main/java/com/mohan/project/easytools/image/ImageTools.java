@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
+/**
+ * 图片相关工具类
+ * @author mohan
+ * @date 2019-07-19
+ */
 public class ImageTools {
 
     /**
