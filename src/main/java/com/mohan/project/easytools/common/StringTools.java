@@ -1,9 +1,13 @@
 package com.mohan.project.easytools.common;
 
-import org.apache.commons.lang3.CharSequenceUtils;
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.io.File;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * String相关工具类
@@ -47,6 +51,19 @@ public class StringTools {
      * ,
      */
     public static final String COMMA = ",";
+
+    private static final String FOLDER_SEPARATOR = "/";
+    private static final String WINDOWS_FOLDER_SEPARATOR = "\\";
+    private static final String TOP_PATH = "..";
+    private static final String CURRENT_PATH = ".";
+    private static final char EXTENSION_SEPARATOR = '.';
+    public static final String WAVE_LINE = "~";
+    public static final String POUND = "#";
+    public static final String NULL = "null";
+    public static final String COLON = ":";
+    public static final String DOLLAR = "$";
+    public static final String UNDERLINE = "_";
+    public static final String POINT = ".";
 
     /**
      * 未找到子串时返回的索引值
@@ -172,11 +189,11 @@ public class StringTools {
 
     /**
      * 去除空格
-     * StringUtils.trim(null)          = null
-     * StringUtils.trim("")            = ""
-     * StringUtils.trim("     ")       = ""
-     * StringUtils.trim("abc")         = "abc"
-     * StringUtils.trim("    abc    ") = "abc"
+     * trim(null)          = null
+     * trim("")            = ""
+     * trim("     ")       = ""
+     * trim("abc")         = "abc"
+     * trim("    abc    ") = "abc"
      * @param str
      * @return
      */
@@ -186,11 +203,11 @@ public class StringTools {
 
     /**
      * 去除空格
-     * StringUtils.trimToEmpty(null)          = ""
-     * StringUtils.trimToEmpty("")            = ""
-     * StringUtils.trimToEmpty("     ")       = ""
-     * StringUtils.trimToEmpty("abc")         = "abc"
-     * StringUtils.trimToEmpty("    abc    ") = "abc"
+     * trimToEmpty(null)          = ""
+     * trimToEmpty("")            = ""
+     * trimToEmpty("     ")       = ""
+     * trimToEmpty("abc")         = "abc"
+     * trimToEmpty("    abc    ") = "abc"
      * @param str
      * @return
      */
@@ -200,11 +217,11 @@ public class StringTools {
 
     /**
      * 去除空格
-     * StringUtils.trimToEmpty(null)          = ""
-     * StringUtils.trimToEmpty("")            = ""
-     * StringUtils.trimToEmpty("     ")       = ""
-     * StringUtils.trimToEmpty(" ab c")         = "abc"
-     * StringUtils.trimToEmpty("    a  b   c    ") = "abc"
+     * trimToEmpty(null)          = ""
+     * trimToEmpty("")            = ""
+     * trimToEmpty("     ")       = ""
+     * trimToEmpty(" ab c")         = "abc"
+     * trimToEmpty("    a  b   c    ") = "abc"
      * @param str
      * @return
      */
@@ -320,12 +337,12 @@ public class StringTools {
      * new String.</p>
      *
      * <pre>
-     * StringUtils.repeat(null, 2) = null
-     * StringUtils.repeat("", 0)   = ""
-     * StringUtils.repeat("", 2)   = ""
-     * StringUtils.repeat("a", 3)  = "aaa"
-     * StringUtils.repeat("ab", 2) = "abab"
-     * StringUtils.repeat("a", -2) = ""
+     * repeat(null, 2) = null
+     * repeat("", 0)   = ""
+     * repeat("", 2)   = ""
+     * repeat("a", 3)  = "aaa"
+     * repeat("ab", 2) = "abab"
+     * repeat("a", -2) = ""
      * </pre>
      *
      * @param str  the String to repeat, may be null
@@ -375,9 +392,9 @@ public class StringTools {
      * to a given length.</p>
      *
      * <pre>
-     * StringUtils.repeat('e', 0)  = ""
-     * StringUtils.repeat('e', 3)  = "eee"
-     * StringUtils.repeat('e', -2) = ""
+     * repeat('e', 0)  = ""
+     * repeat('e', 3)  = "eee"
+     * repeat('e', -2) = ""
      * </pre>
      *
      * <p>Note: this method does not support padding with
@@ -401,5 +418,77 @@ public class StringTools {
             buf[i] = ch;
         }
         return new String(buf);
+    }
+
+    public static String append(String separator, String... strs){
+        List<String> list = Arrays.stream(strs).map(str -> isEmpty(str) ? EMPTY : str).collect(Collectors.toList());
+        return Joiner.on(separator).join(list);
+    }
+
+    public static String append(String separator, Collection<String> strs){
+        if(CollectionTools.isEmpty(strs)) {
+            return EMPTY;
+        }
+        List<String> list = strs.stream().map(str -> isBlank(str) ? EMPTY : str).collect(Collectors.toList());
+        return Joiner.on(separator).join(list);
+    }
+
+    public static String appendJoinUnderLine(String... strs) {
+        return append(UNDERLINE,strs);
+    }
+
+    public static String appendJoinEmpty(String... strs){
+        return append(EMPTY,strs);
+    }
+
+    public static String appendJoinComma(String... strs){
+        return append(COMMA, strs);
+    }
+
+    public static String appendJoinComma(Collection<String> strs){
+        return append(COMMA, strs);
+    }
+
+    public static String appendJoinCommaFiltedEmptyElement(Collection<String> strs){
+        if(CollectionTools.isEmpty(strs)) {
+            return EMPTY;
+        }
+        List<String> list = strs.stream().filter(StringTools::isNotBlank).collect(Collectors.toList());
+        return Joiner.on(COMMA).join(list);
+    }
+
+    public static String appendJoinPound(String... strs){
+        return append(POUND, strs);
+    }
+
+    public static String appendJoinFileSeparator(String... strs){
+        return append(File.separator, strs);
+    }
+
+    public static String appendJoinPound(Collection<String> strs){
+        return append(POUND, strs);
+    }
+
+    public static String appendJoinLF(Collection<String> strs){
+        return append(LF, strs);
+    }
+
+    public static List<String> splitPoundToList(String str) {
+        return splitWithSeparator(POUND, str);
+    }
+
+    public static Set<String> splitPoundToSet(String str) {
+        return Sets.newHashSet(splitWithSeparator(POUND, str));
+    }
+
+    public static List<String> splitComma(String str) {
+        return splitWithSeparator(COMMA, str);
+    }
+
+    public static List<String> splitWithSeparator(String separator, String str) {
+        if(isBlank(str)) {
+            return Lists.newArrayList();
+        }
+        return Splitter.on(separator).splitToList(str);
     }
 }
