@@ -83,8 +83,7 @@ public class FileTools {
      * @return banner信息
      */
     public static String getBanner(String bannerFileName, String defaultBanner) {
-        URL resource = FileTools.class.getClassLoader().getResource("");
-        Path path = Paths.get(resource.getPath(), bannerFileName);
+        Path path = Paths.get(PathTools.getClassesPath(), bannerFileName);
         Optional<String> content = FileTools.getContent(path);
         return content.orElse(defaultBanner);
     }
