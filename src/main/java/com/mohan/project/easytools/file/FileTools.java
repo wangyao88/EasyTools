@@ -1,13 +1,10 @@
 package com.mohan.project.easytools.file;
 
-import com.mohan.project.easytools.common.StringTools;
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,9 +26,13 @@ public class FileTools {
      * @param path 文件路径
      * @return 指定文件内容
      */
-    public static Optional<List<String>> getLines(Path path) {
+    public static Optional<List<String>> getLines(String path) {
         try {
-            return Optional.ofNullable(Files.readAllLines(path, Charset.defaultCharset()));
+            File file = new File(path);
+            if(!file.exists() || file.isDirectory()) {
+                return Optional.empty();
+            }
+            return Optional.ofNullable(Files.readLines(file, Charsets.UTF_8));
         } catch (IOException e) {
             return Optional.empty();
         }
@@ -42,7 +43,7 @@ public class FileTools {
      * @param path 文件路径
      * @return 指定文件内容
      */
-    public static Optional<String> getContent(Path path) {
+    public static Optional<String> getContent(String path) {
         Optional<List<String>> optional = getLines(path);
         List<String> lines = optional.orElse(new ArrayList<>());
         if(lines.isEmpty()) {
@@ -53,38 +54,5 @@ public class FileTools {
             content.append(line).append(LF);
         }
         return Optional.of(content.toString());
-    }
-
-    /**
-     * 获取banner信息
-     * banner文件必须在classess目录下
-     * 默认banner文件名称为banner.txt
-     * @return banner信息
-     */
-    public static String getBanner() {
-        return getBanner("banner.txt", StringTools.EMPTY);
-    }
-
-    /**
-     * 获取banner信息
-     * banner文件必须在classess目录下
-     * @param bannerFileName banner文件名称
-     * @return banner信息
-     */
-    public static String getBanner(String bannerFileName) {
-        return getBanner(bannerFileName, StringTools.EMPTY);
-    }
-
-    /**
-     * 获取banner信息
-     * banner文件必须在classess目录下
-     * @param bannerFileName banner文件名称
-     * @param defaultBanner 默认banner
-     * @return banner信息
-     */
-    public static String getBanner(String bannerFileName, String defaultBanner) {
-        Path path = Paths.get(PathTools.getClassesPath(), bannerFileName);
-        Optional<String> content = FileTools.getContent(path);
-        return content.orElse(defaultBanner);
     }
 }
