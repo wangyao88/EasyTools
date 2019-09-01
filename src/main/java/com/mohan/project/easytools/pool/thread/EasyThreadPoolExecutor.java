@@ -67,7 +67,8 @@ public class EasyThreadPoolExecutor {
         return DEFAULT_THREAD_POOL_EXECUTOR;
     }
 
-    public String info() {
+    @Override
+    public String toString() {
         StringBuilder info = new StringBuilder(200);
         info.append(EasyThreadPoolExecutor.class.getName())
                 .append(StringTools.SPACE)

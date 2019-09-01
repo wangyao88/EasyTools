@@ -25,7 +25,7 @@ public class EasyRejectedExecutionHandler implements RejectedExecutionHandler {
                                             "，由主线程执行当前任务[",
                                             runnable.toString(),
                                             "]。线程池当前状况：\n",
-                                            EasyThreadPoolExecutor.INSTANCE.info());
+                                            executor.toString());
         LogTools.warn(warnInfo);
         if (!executor.isShutdown()) {
             runnable.run();
