@@ -8,11 +8,13 @@ import java.time.format.DateTimeFormatter;
  * @author mohan
  * @date 2018-08-30 09:36:59
  */
-public class DateTools {
+public final class DateTools {
 
     public static final String FORMAT_LOG = "yyyy-MM-dd HH:mm:ss,SSS";
     public static final String FORMAT_LOCAL_DATE = "yyyy-MM-dd=";
     public static final String FORMAT_LOCAL_DATE_TIME = "=HH:mm:ss=";
+
+    private DateTools() {}
 
     public static String getDateTimeString(String pattern) {
         return format(LocalDateTime.now(), pattern);

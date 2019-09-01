@@ -12,14 +12,16 @@ import java.io.*;
  * @author mohan
  * @date 2019-07-19
  */
-public class ImageTools {
+public final class ImageTools {
+
+    private ImageTools() {}
 
     /**
      * 获取文件系统中的图片信息
      * @param path
      * @return
      */
-    public byte[] getImageByPath(String path) {
+    public static byte[] getImageByPath(String path) {
         byte[] buffer = "".getBytes();
         try {
             File file = new File(path);
@@ -45,7 +47,7 @@ public class ImageTools {
      * @param response
      * @throws IOException
      */
-    public void getImageByPath(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public static void getImageByPath(HttpServletRequest request, HttpServletResponse response) throws IOException {
         @Cleanup
         ServletOutputStream out = response.getOutputStream();
         String path = request.getParameter("path");

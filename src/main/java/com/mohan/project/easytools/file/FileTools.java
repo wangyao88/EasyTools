@@ -14,12 +14,14 @@ import java.util.Optional;
  * @author mohan
  * @date 2018-08-29 13:15:22
  */
-public class FileTools {
+public final class FileTools {
 
     /**
      * 系统换行符
      */
     public static final String LF = java.security.AccessController.doPrivileged(new sun.security.action.GetPropertyAction("line.separator"));
+
+    private FileTools() {}
 
     /**
      * 获取指定文件内容

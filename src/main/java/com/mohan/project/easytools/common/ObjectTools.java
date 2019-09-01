@@ -7,7 +7,9 @@ import java.util.stream.Stream;
  * @author mohan
  * @date 2019-07-08
  */
-public class ObjectTools {
+public final class ObjectTools {
+
+    private ObjectTools() {}
 
     public static boolean isNull(Object object) {
         return object == null;

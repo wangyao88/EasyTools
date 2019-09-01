@@ -7,7 +7,9 @@ import java.net.URL;
  * @author mohan
  * @date 2018-08-30 09:36:59
  */
-public class PathTools {
+public final class PathTools {
+
+    private PathTools() {}
 
     public static String getClassesPath() {
         URL resource = FileTools.class.getClassLoader().getResource("");

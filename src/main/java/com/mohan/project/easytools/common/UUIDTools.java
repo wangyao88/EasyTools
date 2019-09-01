@@ -7,7 +7,9 @@ import java.util.UUID;
  * @author mohan
  * @date 2019-07-08
  */
-public class UUIDTools {
+public final class UUIDTools {
+
+	private UUIDTools() {}
 	
 	public static String getUUID(){
 		return UUID.randomUUID().toString();

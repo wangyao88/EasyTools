@@ -5,7 +5,9 @@ package com.mohan.project.easytools.common;
  * @author mohan
  * @date 2019-08-09 14:43:07
  */
-public class CheckTools {
+public final class CheckTools {
+
+    private CheckTools() {}
 
     public static <T> T checkNotNull(T reference) {
         if (reference == null) {

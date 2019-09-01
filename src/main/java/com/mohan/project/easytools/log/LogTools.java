@@ -12,12 +12,14 @@ import java.text.MessageFormat;
  * @author mohan
  * @date 2018-08-30 10:22:58
  */
-public class LogTools {
+public final class LogTools {
 
     private static final String INFO = "info";
     private static final String WARN = "warn";
     private static final String ERROR = "error";
     private static final String DEBUG = "debug";
+
+    private LogTools() {}
 
     public static String info(String msg, Object... args) {
         String formatedMsg = MessageFormat.format(msg, args);

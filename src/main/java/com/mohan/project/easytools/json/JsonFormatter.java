@@ -8,7 +8,9 @@ import com.mohan.project.easytools.common.StringTools;
  * @author mohan
  * @date 2019-08-10 09:09:05
  */
-public class JsonFormatter {
+public final class JsonFormatter {
+
+    private JsonFormatter() {}
 
     /**
      * 将json字符串格式化后输出到控制台

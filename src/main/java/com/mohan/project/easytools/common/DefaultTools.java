@@ -7,7 +7,7 @@ import java.util.Optional;
  * @author mohan
  * @date 2019-08-09 14:36:35
  */
-public class DefaultTools {
+public final class DefaultTools {
 
     private DefaultTools() {}
 

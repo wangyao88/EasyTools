@@ -17,7 +17,9 @@ import java.util.Optional;
  * @author mohan
  * @date 2019-07-08
  */
-public class CollectionTools {
+public final class CollectionTools {
+
+    private CollectionTools() {}
 
     public static <T> T getOneElementOrNull(List<T> lists) {
         if (null != lists && lists.size() >0) {

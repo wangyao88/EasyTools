@@ -9,7 +9,9 @@ import java.util.Optional;
  * @author mohan
  * @date 2018-08-29 13:15:22
  */
-public class BannerTools {
+public final class BannerTools {
+
+    private BannerTools() {}
 
     /**
      * 获取banner信息

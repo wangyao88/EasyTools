@@ -5,7 +5,7 @@ package com.mohan.project.easytools.common;
  * @author mohan
  * @date 2019-08-10 09:28:51
  */
-public class CharTools {
+public final class CharTools {
 
     /**
      * \n
@@ -37,4 +37,5 @@ public class CharTools {
      */
     public static final char SUFFIX_MIDDLE_BRACKET = ']';
 
+    private CharTools() {}
 }

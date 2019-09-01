@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @author mohan
  * @date 2019-07-08
  */
-public class StringTools {
+public final class StringTools {
 
     /**
      * StringBuilder初始容量
@@ -74,6 +74,8 @@ public class StringTools {
      * <p>The maximum size to which the padding constant(s) can expand.</p>
      */
     private static final int PAD_LIMIT = 8192;
+
+    private StringTools() {}
 
     /**
      * 是否为空

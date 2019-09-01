@@ -2,7 +2,9 @@ package com.mohan.project.easytools.common;
 
 import java.lang.reflect.Array;
 
-public class ArrayTools {
+public final class ArrayTools {
+
+    private ArrayTools() {}
 
     public static boolean isEmpty(final Object[] array) {
         return getLength(array) == 0;
