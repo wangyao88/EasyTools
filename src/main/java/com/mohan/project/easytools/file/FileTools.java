@@ -1,10 +1,14 @@
 package com.mohan.project.easytools.file;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
+import com.mohan.project.easytools.common.StringTools;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.LineNumberReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +38,7 @@ public final class FileTools {
             if(!file.exists() || file.isDirectory()) {
                 return Optional.empty();
             }
-            return Optional.ofNullable(Files.readLines(file, Charsets.UTF_8));
+            return Optional.ofNullable(Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8));
         } catch (IOException e) {
             return Optional.empty();
         }
@@ -51,10 +55,22 @@ public final class FileTools {
         if(lines.isEmpty()) {
             return Optional.empty();
         }
-        StringBuilder content = new StringBuilder();
-        for (String line : lines) {
-            content.append(line).append(LF);
+        return Optional.of(StringTools.appendJoinLF(lines));
+    }
+
+    /**
+     * 获取文件行数
+     * @param filePath 文件路径
+     * @return
+     */
+    public static int getFileLineNum(String filePath) {
+        try (LineNumberReader lineNumberReader = new LineNumberReader(new FileReader(filePath))){
+            lineNumberReader.skip(Long.MAX_VALUE);
+            int lineNumber = lineNumberReader.getLineNumber();
+            //实际上是读取换行符数量 , 所以需要+1
+            return lineNumber + 1;
+        } catch (IOException e) {
+            return -1;
         }
-        return Optional.of(content.toString());
     }
 }
