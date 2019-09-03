@@ -16,4 +16,7 @@ public final class PathTools {
         return resource.getPath();
     }
 
+    public static String getPathInClassesPath(String fileName) {
+        return getClassesPath() + fileName;
+    }
 }

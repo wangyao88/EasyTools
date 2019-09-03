@@ -1,7 +1,5 @@
 package com.mohan.project.easytools.test.nio;
 
-import com.mohan.project.easytools.file.PathTools;
-
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -10,7 +8,7 @@ import java.nio.channels.FileChannel;
 public class BufferTest {
 
     public static void main(String[] args) throws IOException {
-        RandomAccessFile aFile = new RandomAccessFile(PathTools.getClassesPath()+"buffer.txt", "rw");
+        RandomAccessFile aFile = new RandomAccessFile("data/nio-data.txt", "rw");
         FileChannel inChannel = aFile.getChannel();
 
         //create buffer with capacity of 48 bytes
@@ -24,6 +22,7 @@ public class BufferTest {
                 // read 1 byte at a time
                 System.out.print((char) buf.get());
             }
+
             //make buffer ready for writing
             buf.clear();
             bytesRead = inChannel.read(buf);
