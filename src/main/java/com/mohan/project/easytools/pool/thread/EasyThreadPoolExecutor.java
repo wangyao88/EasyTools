@@ -63,7 +63,7 @@ public class EasyThreadPoolExecutor {
         return threadPoolExecutor.remove(task);
     }
 
-    public static Executor getDefaultExecutor() {
+    public static ThreadPoolExecutor getDefaultExecutor() {
         return DEFAULT_THREAD_POOL_EXECUTOR;
     }
 
