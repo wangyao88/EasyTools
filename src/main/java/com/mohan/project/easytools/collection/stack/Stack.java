@@ -93,18 +93,12 @@ public class Stack<E> implements Iterable<E> {
         if (isEmpty()) {
             throw new RuntimeException("Stack underflow");
         }
-        /*
-        save element to return
-         */
+        //save element to return
         E element = first.element;
-        /*
-        delete first node
-         */
+        //delete first node
         first = first.next;
         size--;
-        /*
-        return the saved element
-         */
+        //return the saved element
         return element;
     }
 

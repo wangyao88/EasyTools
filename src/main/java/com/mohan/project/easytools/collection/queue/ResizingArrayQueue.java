@@ -75,24 +75,15 @@ public class ResizingArrayQueue<E> implements Iterable<E> {
         last = size;
     }
 
-
     public void enqueue(E item) {
-        /*
-         double size of array if necessary and recopy to front of array
-         */
+        //double size of array if necessary and recopy to front of array
         if (size == queue.length) {
-            /*
-            double size of array if necessary
-             */
+            //double size of array if necessary
             resize(2 * queue.length);
         }
-        /*
-        add item
-         */
+        //add item
         queue[last++] = item;
-        /*
-        wrap-around
-         */
+        //wrap-around
         if (last == queue.length) {
             last = 0;
         }
@@ -105,17 +96,15 @@ public class ResizingArrayQueue<E> implements Iterable<E> {
      * @return
      */
     public E dequeue() {
-        if (isEmpty()) throw new RuntimeException("Queue underflow");
+        if (isEmpty()) {
+            throw new RuntimeException("Queue underflow");
+        }
         E item = queue[first];
-        /*
-        to avoid loitering
-         */
+        //to avoid loitering
         queue[first] = null;
         size--;
         first++;
-        /*
-        wrap-around
-         */
+        //wrap-around
         if (first == queue.length) {
             first = 0;
         }
@@ -135,6 +124,7 @@ public class ResizingArrayQueue<E> implements Iterable<E> {
      * an iterator, doesn't implement remove() since it's optional
      */
     private class QueueIterator implements Iterator<E> {
+
         private int i = 0;
 
         @Override

@@ -117,9 +117,7 @@ public class Queue<E> implements Iterable<E> {
         E element = first.element;
         first = first.next;
         size--;
-        /*
-         * to avoid loitering
-         */
+        //to avoid loitering
         if (isEmpty()) {
             last = null;
         }

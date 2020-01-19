@@ -100,7 +100,9 @@ public class Bag<E> implements Iterable<E> {
 
         @Override
         public E next() {
-            if (!hasNext()) throw new NoSuchElementException();
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             E element = current.element;
             current = current.next;
             return element;

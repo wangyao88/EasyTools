@@ -72,14 +72,10 @@ public class ResizingArrayStack<E> implements Iterable<E> {
      */
     public void push(E item) {
         if (size == elements.length) {
-            /*
-            double size of array if necessary
-             */
+           //double size of array if necessary
             resize(2 * elements.length);
         }
-        /*
-        add item
-         */
+        //add item
         elements[size++] = item;
     }
 
@@ -93,9 +89,7 @@ public class ResizingArrayStack<E> implements Iterable<E> {
             throw new RuntimeException("Stack underflow error");
         }
         E item = elements[size - 1];
-        /**
-         * to avoid loitering
-         */
+        //to avoid loitering
         elements[size - 1] = null;
         size--;
         // shrink size of array if necessary
