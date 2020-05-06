@@ -91,7 +91,7 @@ public class Deque<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new ListIterator();
     }
 
     private class ListIterator implements Iterator<E> {

@@ -451,6 +451,10 @@ public final class StringTools {
         return append(COMMA, strs);
     }
 
+    public static String appendJoinPoint(Collection<String> strs){
+        return append(POINT, strs);
+    }
+
     public static String appendJoinCommaFiltedEmptyElement(Collection<String> strs){
         if(CollectionTools.isEmpty(strs)) {
             return EMPTY;

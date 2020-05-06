@@ -11,7 +11,7 @@ public final class ArrayTools {
     }
 
     public static boolean isNotEmpty(final Object[] array) {
-        return isEmpty(array);
+        return !isEmpty(array);
     }
 
     public static int getLength(final Object array) {
