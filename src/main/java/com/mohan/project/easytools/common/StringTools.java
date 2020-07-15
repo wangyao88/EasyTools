@@ -64,6 +64,8 @@ public final class StringTools {
     public static final String DOLLAR = "$";
     public static final String UNDERLINE = "_";
     public static final String POINT = ".";
+    public static final String LINE_BREAK = "\n\r";
+    public static final String HR = "------------------------------------------------";
 
     /**
      * 未找到子串时返回的索引值
